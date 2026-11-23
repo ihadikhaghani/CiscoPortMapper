@@ -142,7 +142,7 @@ Time remaining: 61 seconds
 System Capabilities: W
 Enabled Capabilities: W
 Management Addresses:
-    IP: 10.8.8.5
+    IP: 172.16.8.5
 Vlan ID: - not advertised
 """
 
@@ -403,7 +403,7 @@ def main() -> int:
     chassis_row = chassis_rows[0]
     check("chassis neighbor", chassis_row["neighbor"] == "EAP1300", str(chassis_row))
     check("chassis source", chassis_row["source"] == "LLDP", str(chassis_row))
-    check("chassis ip", chassis_row["ip"] == "10.8.8.5", str(chassis_row))
+    check("chassis ip", chassis_row["ip"] == "172.16.8.5", str(chassis_row))
     check("chassis platform", "EnGenius" in chassis_row["platform"], str(chassis_row))
 
     med_text = (
@@ -456,27 +456,27 @@ def main() -> int:
     print("ARP table import")
     forti = (
         "Address           Age(min)  Hardware Addr     Interface\n"
-        "10.8.12.10        5         3c:ef:8c:11:22:33  VLAN12\n"
-        "10.8.12.11        4         3c:ef:8c:11:22:44  VLAN12\n"
+        "172.16.12.10        5         3c:ef:8c:11:22:33  VLAN12\n"
+        "172.16.12.11        4         3c:ef:8c:11:22:44  VLAN12\n"
         "255.255.255.255   0         ff:ff:ff:ff:ff:ff  root\n"
     )
     forti_arp = parse_arp_table(forti)
     check("forti arp count", len(forti_arp) == 2, str(forti_arp))
     check("forti arp mac",
-          forti_arp.get("10.8.12.10") == "3C:EF:8C:11:22:33",
+          forti_arp.get("172.16.12.10") == "3C:EF:8C:11:22:33",
           str(forti_arp))
     cisco_arp_text = (
         "Protocol  Address          Age (min)  Hardware Addr   Type   Interface\n"
-        "Internet  10.8.12.20             12   3cef.8c11.2255  ARPA   Vlan12\n"
+        "Internet  172.16.12.20             12   3cef.8c11.2255  ARPA   Vlan12\n"
     )
     cisco_arp = parse_arp_table(cisco_arp_text)
     check("cisco dotted arp",
-          cisco_arp.get("10.8.12.20") == "3C:EF:8C:11:22:55", str(cisco_arp))
+          cisco_arp.get("172.16.12.20") == "3C:EF:8C:11:22:55", str(cisco_arp))
     windows_arp = parse_arp_table(
-        "  10.8.12.30          3c-ef-8c-11-22-66     dynamic\n"
+        "  172.16.12.30          3c-ef-8c-11-22-66     dynamic\n"
     )
     check("windows arp",
-          windows_arp.get("10.8.12.30") == "3C:EF:8C:11:22:66",
+          windows_arp.get("172.16.12.30") == "3C:EF:8C:11:22:66",
           str(windows_arp))
 
     print("camera classification")
@@ -1216,9 +1216,9 @@ def main() -> int:
     from app import PORT_STATUS_FILTERS, _row_matches_search
 
     search_row = {
-        "ip": "10.8.40.15",
+        "ip": "172.16.40.15",
         "mac": "44:19:B6:01:02:03",
-        "macs": "44:19:B6:01:02:03 (10.8.40.15), AA:BB:CC:DD:EE:FF",
+        "macs": "44:19:B6:01:02:03 (172.16.40.15), AA:BB:CC:DD:EE:FF",
         "port_status_label": "Confirmed",
         "interface": "GigabitEthernet1/0/15",
     }
@@ -1227,9 +1227,9 @@ def main() -> int:
         ("interface", "Interface", 0),
     ]
     check("exact IP search matches",
-          _row_matches_search(search_row, "10.8.40.15", search_columns))
+          _row_matches_search(search_row, "172.16.40.15", search_columns))
     check("partial IP does not exact-match",
-          not _row_matches_search(search_row, "10.8.40.1", search_columns))
+          not _row_matches_search(search_row, "172.16.40.1", search_columns))
     check("exact MAC search normalises separators",
           _row_matches_search(search_row, "44-19-b6-01-02-03", search_columns))
     check("dotted MAC search normalises separators",

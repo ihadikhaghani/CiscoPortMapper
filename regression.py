@@ -114,7 +114,7 @@ def replay_fixture(path: str) -> dict:
 
     devices = [
         Camera(
-            ip=f"10.8.40.{index + 1}",
+            ip=f"172.16.40.{index + 1}",
             mac=mac,
             model="regression",
             confidence="High",

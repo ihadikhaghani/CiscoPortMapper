@@ -1718,7 +1718,7 @@ class App(tk.Tk):
                 APP_TITLE,
                 "No IP/MAC pairs were found in this file.\n\n"
                 "Expected lines with an IPv4 address and a MAC address, e.g.\n"
-                "10.8.12.10  5  3c:ef:8c:11:22:33  VLAN12",
+                "172.16.12.10  5  3c:ef:8c:11:22:33  VLAN12",
             )
             return
         self.manual_ip_mac.update(table)
