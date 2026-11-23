@@ -1,0 +1,12 @@
+# No Python packages are required at runtime.
+#
+# SSH is done through external tools that are already on Windows:
+#   - plink.exe from PuTTY (recommended: supports password login)
+#   - ssh.exe from the Windows OpenSSH Client (key / ssh-agent login only)
+#
+# Put plink.exe next to this file, or install PuTTY / the OpenSSH Client.
+# run.bat and the in-app Setup... button can download plink.exe automatically
+# through prereq.py (no administrator rights needed).
+# Camera discovery (cameras.py) also uses only the Python standard library:
+# ARP goes through the Windows iphlpapi (ctypes), detection uses plain sockets.
+# PyInstaller is only needed by build.bat to create the .exe.

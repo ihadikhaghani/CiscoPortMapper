@@ -1,0 +1,27 @@
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Build output
+build/
+dist/
+*.spec
+
+# Local runtime files - never commit real network data or credentials
+inventory.json
+raw_*.txt
+oui.csv
+*.log
+plink.exe
+*.exe
+
+# Generated reports / exports
+*.xlsx
+*.csv
+
+# OS files
+.DS_Store
+Thumbs.db
